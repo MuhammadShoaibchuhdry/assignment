@@ -45,7 +45,7 @@ func NewRouter(ctrl repository.User) *chi.Mux {
 // genDocs will generate documentation for user endpoints
 func genDocs(rout *chi.Mux) {
 	// Markdown docs
-	ioutil.WriteFile("user_routes.md", []byte(docgen.MarkdownRoutesDoc(rout,
+	ioutil.WriteFile("user/user_routes.md", []byte(docgen.MarkdownRoutesDoc(rout,
 		docgen.MarkdownOpts{
 			ProjectPath:        "assignment/user",
 			Intro:              "Assignment API.",
