@@ -36,8 +36,7 @@ func (u *user) CreateUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.WriteJsonRes(w, data)
-
+	utils.WriteJsonRes(w, model.Success{Message:"success"})
 }
 
 // GetUserHandler will return user name and token id
@@ -54,7 +53,6 @@ func (u *user) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		utils.WriteJsonErr(w, err)
 		return
 	}
-
 	tokenString, err := utils.GenerateUserToken(jwt.MapClaims{
 		"user_id": user.Id.Hex(),
 		"exp":     time.Now().Add(time.Hour * 3).Unix(),
@@ -63,21 +61,18 @@ func (u *user) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		utils.WriteJsonErr(w, err)
 		return
 	}
-
 	res := model.UserResponse{
 		AccessToken:   tokenString,
 		Name:          user.Name,
 		Email:         user.Email,
 	}
-
 	utils.WriteJsonRes(w, res)
-
 }
 
 // UpdateUserHandler will update user name and phone
 func (u *user) UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	var data model.UserUpdate
-	_, claims, _ := jwtauth.FromContext(r.Context())
+	_, claims,_ := jwtauth.FromContext(r.Context())
 	id := claims["user_id"]
 	if id == nil {
 		utils.WriteJsonErr(w, fmt.Errorf("token id not found in request"))

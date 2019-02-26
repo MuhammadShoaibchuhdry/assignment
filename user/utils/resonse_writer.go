@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"bicho/bgamble/app/model"
+	"assignment/user/app/model"
 	"encoding/json"
 	"fmt"
 	"net/http"

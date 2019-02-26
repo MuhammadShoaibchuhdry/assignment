@@ -48,10 +48,6 @@ func (t UserSignIn) Validate(r *http.Request) error {
 }
 
 func (t UserUpdate) Validate(r *http.Request) error {
-	// validate the name is not empty or missing
-	if !govalidator.IsEmail(t.Name) {
-		return UserEmailReq
-	}
 	// validate the phone is not empty or missing
 	if govalidator.IsNull(t.PhoneNumber) {
 		return UserEmailReq
