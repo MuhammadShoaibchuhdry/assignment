@@ -17,7 +17,7 @@ func NewRouter(ctrl repository.User) *chi.Mux {
 	r := chi.NewRouter()
 	// Basic CORS
 	cors := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"}, // AllowOriginFunc:  func(r *http.Request, origin string) bool { return true },
+		AllowedOrigins:   []string{"*"}, // AllowOriginFunc:  func(r *http.Request, origin string) bool { return true },
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
@@ -48,7 +48,7 @@ func genDocs(rout *chi.Mux) {
 	ioutil.WriteFile("user/user_routes.md", []byte(docgen.MarkdownRoutesDoc(rout,
 		docgen.MarkdownOpts{
 			ProjectPath:        "assignment/user",
-			Intro:              "Assignment API.",
+			Intro:              "User API.",
 			ForceRelativeLinks: true,
 		})), 0666)
 }
